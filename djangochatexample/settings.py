@@ -29,6 +29,10 @@ DEBUG = config('DEBUG', default=False, cast=bool)
 
 ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='', cast=Csv())
 
+LOGOUT_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/rooms/'
+LOGIN_URL = '/login/'
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -38,7 +42,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'djangochatexample.core'
+    'djangochatexample.core',
+    'djangochatexample.room',
+    'channels',
 ]
 
 MIDDLEWARE = [
@@ -70,6 +76,14 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'djangochatexample.wsgi.application'
+ASGI_APPLICATION = 'djangochatexample.asgi.application'
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels.layers.InMemoryChannelLayer',
+    }
+}
+
 
 
 # Database
